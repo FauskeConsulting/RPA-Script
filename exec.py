@@ -101,15 +101,15 @@ def update_timer():
     else:
         elapsed_label.config(text="Time since execution: N/A")
     root.after(1000, update_timer)
-
+def combined_function():
+    main_with_logging()
+    toggle_scheduler()
 # GUI Setup
 root = tk.Tk()
 root.title("Scheduler GUI")
 
-start_button = tk.Button(root, text="Start", command=toggle_scheduler, width=20)
+start_button = tk.Button(root, text="Start", command=main_with_logging, width=20)
 start_button.pack(pady=10)
-
-
 
 log_button = tk.Button(root, text="Show Logs", command=show_logs, width=20)
 log_button.pack(pady=10)

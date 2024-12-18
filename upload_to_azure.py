@@ -7,7 +7,7 @@ def upload_to_azure(df,name):
     try:
                 # Azure Storage connection string
                 AZURE_STORAGE_CONNECTION_STRING = "DefaultEndpointsProtocol=https;AccountName=krunchtest;AccountKey=M8DSdcSRERbD/yucKJGeP41cafaiyuadsZ5yEl6rT/lkn419BAlaWBmAOZ1/X6yLs4ofKU0hrycT+AStB3bIJw==;EndpointSuffix=core.windows.net"  # Replace with your connection string
-                container_name = "rpa-test"  # Replace with your container name
+                container_name = "testcontainer"  # Replace with your container name
 
                 # Initialize the BlobServiceClient
                 blob_service_client = BlobServiceClient.from_connection_string(AZURE_STORAGE_CONNECTION_STRING)
