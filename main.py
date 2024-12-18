@@ -4,7 +4,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
+from selenium.webdriver.chrome.options import Options
 import os
 import platform
 import time
@@ -37,7 +37,10 @@ def get_download_directory():
         return os.path.join(os.environ["HOME"], "Downloads")
 def main(logs):
     try:
-        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+        chrome_options = Options()
+        chrome_options.add_argument("--headless")
+        chrome_options.add_argument("--disable-gpu")
+        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=chrome_options)
         wait = WebDriverWait(driver, 10)
     except Exception as e:
         log_message("Error initializing chrome helper with error:",logs)
@@ -140,7 +143,7 @@ def main(logs):
                 for shop_name, shop_df in grouped_data.items():
                     # Convert DataFrame to CSV in memory
                     output = BytesIO()
-                    shop_df.to_csv(output, index=False)  # Write DataFrame as CSV to BytesIO
+                    shop_df.to_csv(output, index=False,sep=';')  # Write DataFrame as CSV to BytesIO
                     output.seek(0)
                     # Define the blob name
                     blob_name = f"{shop_name.replace(' ', '_').replace('/', '_')}_sales.csv"
